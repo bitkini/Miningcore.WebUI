@@ -43,7 +43,61 @@
   <script src="js/chartist.min.js"></script>
   <script src="js/miningcore.js"></script>
 
-  
+<style>
+  /* Bitkini Guide Card */
+  .bitkini-guide {
+    background: linear-gradient(145deg, #fffefa, #e0f7fa);
+    border: 2px solid #20c997; /* teal accent */
+    border-radius: 12px;
+    padding: 1.5rem;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #333;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 2rem;
+  }
+  .bitkini-guide h5 {
+    background-color: #6f42c1; /* pool header purple */
+    color: #fff;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+  }
+  .bitkini-guide ol {
+    margin-left: 1.2rem;
+  }
+  .bitkini-guide li {
+    margin-bottom: 0.75rem;
+  }
+  .bitkini-guide code {
+    display: inline-block;
+    background: #f1f3f5;
+    border: 1px solid #dee2e6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: Menlo, monospace;
+    color: #e83e8c; /* coral accent */
+  }
+  .bitkini-guide pre {
+    background: #f1f3f5;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 0.75rem;
+    overflow-x: auto;
+    font-family: Menlo, monospace;
+    color: #6f42c1;
+    margin-bottom: 0.5rem;
+  }
+  .bitkini-guide a {
+    color: #20c997;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .bitkini-guide a:hover {
+    color: #fd7e14;
+    text-decoration: underline;
+  }
+</style>
 </head>
 
 <!--
@@ -133,11 +187,6 @@ Apply one or more of the following classes to get the desired effect
              <i class="fas fa-wallet"></i><span>Payments</span>
             </a>
           </li>
-          <li class="nav-connect">
-            <a class="nav-link" href="#{{ coinId }}/connect">
-              <i class="fas fa-plug"></i><span>Connect</span>
-            </a>
-          </li>
           <li class="nav-faq">
             <a class="nav-link" href="#{{ coinId }}/faq">
               <i class="fas fa-comment-dots"></i><span>FAQ</span>
@@ -186,13 +235,38 @@ Apply one or more of the following classes to get the desired effect
 		<div class="content container-fluid " >	
 			
 			<div class="col-12">
-				<div class="card card-shadow card-body">
-					<center><h5> Welcome to Bitkini Mining Pool</h5></center>
-					<hr>
-					<p>Low fee, high performance and a nice design. </br> Pick a coin, connect you miner and make some coins.</p>
-					</br>
-				</div>
-			</div>
+        <div class="bitkini-guide">
+          <h5 class="text-center">Welcome to Bitkini Mining Pool</h5>
+          <p><strong>What is Bitkini?</strong><br>
+          Bitkini is a fast, meme-tier SHA256d chain—1 min blocks, 31 351 500 $KINI max supply.</p>
+
+          <p><strong>How to Mine</strong></p>
+          <ol>
+            <li>
+              <strong>Get a $KINI address:</strong><br>
+              Download our GUI wallet from <a href="https://bitkini.lol/" target="_blank">bitkini.lol</a>  
+              or build it yourself:<br>
+              <code>git clone https://github.com/bitkini/bitkini.git</code>
+            </li>
+            <li>
+              <strong>Point your miner:</strong><br>
+              <code>stratum+tcp://pool.bitkini.lol:4067</code>
+            </li>
+            <li>
+              <strong>Run your miner</strong> (CPU, ASIC, GPU):<br>
+              <pre><code>minerd --algo sha256d \
+        --url stratum+tcp://pool.bitkini.lol:4067 \
+        --user &lt;YOUR-KINI-ADDRESS&gt;.&lt;RIG-ID&gt; \
+        --threads &lt;THREADS&gt;</code></pre>
+              No password needed!
+            </li>
+          </ol>
+
+          <p><strong>Payouts</strong><br>
+          Coinbase maturity: <strong>1000</strong> blocks (~17 hrs)<br>
+          Min auto-payout: <strong>100 $KINI</strong></p>
+        </div>
+      </div>
 			</br>
 			<div class="col-12">
 				<div class="card card-shadow">
@@ -224,7 +298,7 @@ Apply one or more of the following classes to get the desired effect
 
 <!-- INDEX FOOTER --> 
     <footer class="main-index-footer">
-      <strong><a target="_blank" href="https://github.com/minernl/Miningcore.WebUI">&copy; <script>document.write(new Date().getFullYear())</script> made by COINStoMINE.eu</a> - Version 1.02</strong>
+      <strong><a target="_blank" href="https://bitkini.lol/">&copy; <script>document.write(new Date().getFullYear())</script> made by Bitkini</a> - Version 1.02</strong>
     </footer>
 
   </div>
@@ -643,46 +717,6 @@ Apply one or more of the following classes to get the desired effect
 		  </div>
 		</div>	
 	</div>
-		
-<!-- POOL CONNECT PAGE -->
-    <div class="page page-connect" style="display:none;">
-		<section class="content-header">
-			<h1>POOL<small>connection</small></h1>
-		</section>
-		<div class="content container-fluid">
-		
-		  <div class="row">
-			<div class="col-lg-12 col-md-12">
-              <div class="card">
-                <div class="card-header bg-maroon-gradient">
-                  <h3 class="card-title "><p><i class="fas fa-plug"></i> Pool Configuration</p></h3>
-                  <p class="card-category"> All you need to connect your miners</p>
-                </div>
-                <div class="card-body table-hover">
-                  <div class="table-responsive">
-                    <table id="pool-config" class="table pool-config">
-                      <thead class=" text-primary">
-						<tr class="pool-config">
-							<th>Item</th>
-                            <th>Value</th>
-                        </tr>
-					  </thead>
-                      <tbody id="connectPoolConfig"></tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-			</div>
-		  </div>
-		  
-		  <div class="row">
-			<div class="col-lg-12 col-md-12">
-				<div id="miner-config"></div>
-			</div>
-		  </div>
-		  
-		</div>
-	</div>
 	
 <!-- POOL FAQ PAGE -->	  
     <div class="page page-faq" style="display:none;">
@@ -857,8 +891,8 @@ Apply one or more of the following classes to get the desired effect
                 <div class="card">
                    <div class="card-header bg-teal-gradient"><h4 class="title"><i class="ti-headphone-alt"></i> Support</h4></div>
                     <div class="content table-responsive table-full-width">
-                      <a href="https://discord.gg/" target="_blank"> <img style="width:300px;" src="img/discord.png" alt="Discord"> </a>
-                      <a href="https://t.me/joinchat/" target="_blank"> <img style="width:300px;" src="img/telegram.png" alt="Telegram"> </a>
+                      <a href="https://discord.com/invite/yseJtyPbbU" target="_blank"> <img style="width:300px;" src="img/discord.png" alt="Discord"> </a>
+                      <a href="https://t.me/BitkiniChain" target="_blank"> <img style="width:300px;" src="img/telegram.png" alt="Telegram"> </a>
                     </div>
                 </div>
             </div>
@@ -869,7 +903,7 @@ Apply one or more of the following classes to get the desired effect
   </div> 
 
   <footer class="main-footer">
-	<strong><a target="_blank" href="https://github.com/minernl/Miningcore.WebUI">&copy; <script>document.write(new Date().getFullYear())</script> made by COINStoMINE.eu</a></strong>    
+	<strong><a target="_blank" href="https://bitkini.lol/">&copy; <script>document.write(new Date().getFullYear())</script> made by Bitkini</a></strong>    
   </footer>
  
   </div> <!-- end main-pool -->
